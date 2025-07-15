@@ -1,5 +1,5 @@
-const API_BASE_URL = 'http://localhost:3000/api';
-const API_DEPLOYED_URL = 'https://leaderboard-api-production.up.railway.app/api';
+//const API_LOCAL_URL = 'http://localhost:3000/api';
+const API_DEPLOYED_URL = 'https://threew-task-point-assigner.onrender.com/api';
 
 export interface User {
   _id: string;
@@ -18,8 +18,8 @@ export interface ClaimHistory {
 
 // Get all users
 export const getUsers = async (): Promise<User[]> => {
-  const response = await fetch(`${API_BASE_URL}/users`);
-  if (!response.ok) {
+  const response = await fetch(`${API_DEPLOYED_URL}/users`);
+  if (!response.ok) { 
     throw new Error('Failed to fetch users');
   }
   return response.json();
@@ -27,7 +27,7 @@ export const getUsers = async (): Promise<User[]> => {
 
 // Add new user
 export const addUser = async (name: string): Promise<User> => {
-  const response = await fetch(`${API_BASE_URL}/users`, {
+  const response = await fetch(`${API_DEPLOYED_URL}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export const addUser = async (name: string): Promise<User> => {
 
 // Claim points for user
 export const claimPoints = async (userId: string): Promise<{ user: User; claimedPoints: number }> => {
-  const response = await fetch(`${API_BASE_URL}/users/${userId}/claim`, {
+  const response = await fetch(`${API_DEPLOYED_URL}/users/${userId}/claim`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export const claimPoints = async (userId: string): Promise<{ user: User; claimed
 
 // Get claim history
 export const getClaimHistory = async (): Promise<ClaimHistory[]> => {
-  const response = await fetch(`${API_BASE_URL}/claims/history`);
+  const response = await fetch(`${API_DEPLOYED_URL}/claims/history`);
   if (!response.ok) {
     throw new Error('Failed to fetch claim history');
   }

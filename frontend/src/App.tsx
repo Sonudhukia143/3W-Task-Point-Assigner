@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { io, Socket } from 'socket.io-client';
 import UserList from './components/UserList';
 import ClaimButton from './components/ClaimButton';
@@ -19,10 +19,10 @@ function App() {
 
   // Initialize Socket.IO connection
   useEffect(() => {
-    const newSocket = io('http://localhost:3000');
+    const newSocket = io('https://threew-task-point-assigner.onrender.com/api');
     setSocket(newSocket);
 
-    newSocket.on('usersUpdated', (updatedUsers: User[]) => {
+    newSocket.on('usersUpdated', (updatedUsers: User[]) => {  
       setUsers(updatedUsers);
     });
 
@@ -34,7 +34,7 @@ function App() {
     return () => {
       newSocket.close();
     };
-  }, []);
+  }, [socket]);
 
   // Load users on component mount
   useEffect(() => {
@@ -99,18 +99,6 @@ function App() {
             >
               Live Ranking
             </button>
-            <button 
-              className={`text-lg font-medium pb-2 transition-colors ${activeTab === 'hourly' ? 'border-b-4 border-yellow-400 text-yellow-700' : 'text-gray-500 hover:text-yellow-600'}`}
-              onClick={() => setActiveTab('hourly')}
-            >
-              Hourly Ranking
-            </button>
-            <button 
-              className={`text-lg font-medium pb-2 transition-colors ${activeTab === 'family' ? 'border-b-4 border-yellow-400 text-yellow-700' : 'text-gray-500 hover:text-yellow-600'}`}
-              onClick={() => setActiveTab('family')}
-            >
-              Family Ranking
-            </button>
           </nav>
         </div>
         <div className="mt-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
@@ -158,18 +146,6 @@ function App() {
               <ClaimHistory />
             </aside>
           </>
-        )}
-        {activeTab === 'hourly' && (
-          <section className="col-span-full text-center py-16">
-            <h3 className="text-2xl font-bold text-gray-800">Hourly Ranking</h3>
-            <p className="text-gray-600 mt-2">Coming soon...</p>
-          </section>
-        )}
-        {activeTab === 'family' && (
-          <section className="col-span-full text-center py-16">
-            <h3 className="text-2xl font-bold text-gray-800">Family Ranking</h3>
-            <p className="text-gray-600 mt-2">Coming soon...</p>
-          </section>
         )}
       </main>
     </div>

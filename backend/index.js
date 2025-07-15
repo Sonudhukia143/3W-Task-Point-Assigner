@@ -9,18 +9,22 @@ import claimsRouter from './routes/claims.js';
 
 dotenv.config(); // loads environment variables from .env file
 
+const corsOptions = {
+  origin: ['http://localhost:5173'],   // allows requests from http://localhost:5173 and live url
+  credentials: true,
+  methods: ['GET', 'POST'],
+  optionsSuccessStatus: 200,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 const app = express();
 const server = http.createServer(app);
 const io = new SocketIOServer(server, { 
   // creates a new Socket.IO server instance and configures it  to allow requests from http://localhost:5173
-  cors: {
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST"]
-  }
+  cors: corsOptions
 });
 
 // Middleware
-app.use(cors());  // allows requests from different origins
+app.use(cors(corsOptions)); // allows requests from different origins
 app.use(express.json());  // parses incoming requests with JSON payloads
 
 // MongoDB Connection

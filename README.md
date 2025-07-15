@@ -26,7 +26,7 @@ A full-stack application that allows users to claim random points and view real-
 
 ### Prerequisites
 - Node.js (v14 or higher)
-- MongoDB (local installation or MongoDB Atlas)
+- MongoDB (MongoDB Atlas Cloud)
 - npm or yarn
 
 ### Backend Setup
@@ -45,10 +45,9 @@ A full-stack application that allows users to claim random points and view real-
    Create a `.env` file in the backend directory with:
    ```
    PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/leaderboard-app
+   MONGODB_URI=Your Cloud Cluster UI
    ```
    
-   For MongoDB Atlas, use your connection string instead.
 
 4. **Seed the database with initial users:**
    ```bash
@@ -60,7 +59,7 @@ A full-stack application that allows users to claim random points and view real-
    npm run dev
    ```
 
-       The backend will run on `http://localhost:3000`
+   The backend will run on `http://localhost:3000`
 
 ### Frontend Setup
 
@@ -171,7 +170,6 @@ Task-App-3W/
 
 - Backend runs on port 3000
 - Frontend runs on port 5173
-- MongoDB runs on port 27017 (default)
 - CORS is enabled for development
 
 ## Bonus Features
