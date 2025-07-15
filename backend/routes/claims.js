@@ -10,9 +10,9 @@ router.get('/history', async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(50); // Limit to last 50 claims for performance
     
-    res.json(history);
+    return res.json(history);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching claim history', error: error.message });
+    return res.status(500).json({ message: 'Error fetching claim history', error: error.message });
   }
 });
 
@@ -25,9 +25,9 @@ router.get('/history/:userId', async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(20);
     
-    res.json(history);
+    return res.json(history);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching user claim history', error: error.message });
+    return res.status(500).json({ message: 'Error fetching user claim history', error: error.message });
   }
 });
 

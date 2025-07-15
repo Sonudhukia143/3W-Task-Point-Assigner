@@ -7,11 +7,12 @@ import dotenv from 'dotenv';
 import usersRouter from './routes/users.js';
 import claimsRouter from './routes/claims.js';
 
-dotenv.config();
+dotenv.config(); // loads environment variables from .env file
 
 const app = express();
 const server = http.createServer(app);
-const io = new SocketIOServer(server, {
+const io = new SocketIOServer(server, { 
+  // creates a new Socket.IO server instance and configures it  to allow requests from http://localhost:5173
   cors: {
     origin: "http://localhost:5173",
     methods: ["GET", "POST"]
@@ -19,19 +20,19 @@ const io = new SocketIOServer(server, {
 });
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors());  // allows requests from different origins
+app.use(express.json());  // parses incoming requests with JSON payloads
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, {
-  // options can be omitted for Mongoose 6+
-});
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+  }
+};
+connectDB();
 
 // Socket.IO connection handling
 io.on('connection', (socket) => {
@@ -50,7 +51,7 @@ app.use('/api/claims', claimsRouter);
 
 // Basic route for testing
 app.get('/', (req, res) => {
-  res.json({ message: 'Leaderboard API is running!' });
+  return res.json({ message: 'Leaderboard API is running!' });
 });
 
 const PORT = process.env.PORT || 3000;

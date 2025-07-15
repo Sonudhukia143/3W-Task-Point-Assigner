@@ -1,4 +1,5 @@
 const API_BASE_URL = 'http://localhost:3000/api';
+const API_DEPLOYED_URL = 'https://leaderboard-api-production.up.railway.app/api';
 
 export interface User {
   _id: string;
