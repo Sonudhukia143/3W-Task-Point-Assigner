@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { io, Socket } from 'socket.io-client';
 import { getClaimHistory } from '../api/api';
 import type { ClaimHistory as ClaimHistoryType } from '../api/api';
+
+const SOCKET_URL = 'https://threew-task-point-assigner.onrender.com';
 
 const ClaimHistory: React.FC = () => {
   const [history, setHistory] = useState<ClaimHistoryType[]>([]);
@@ -8,6 +11,17 @@ const ClaimHistory: React.FC = () => {
 
   useEffect(() => {
     loadHistory();
+    // Set up Socket.IO for real-time updates
+    const socket: Socket = io(SOCKET_URL);
+    socket.on('pointClaimed', (data) => {
+      if (data.claimHistory) {
+        setHistory((prev) => [data.claimHistory, ...prev].slice(0, 10));
+        console.log('pointClaimed', history);
+      }
+    });
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const loadHistory = async () => {

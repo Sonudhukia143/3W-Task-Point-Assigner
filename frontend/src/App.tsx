@@ -15,11 +15,11 @@ function App() {
   const [isAdding, setIsAdding] = useState(false);
   const [lastClaimedPoints, setLastClaimedPoints] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState('leaderboard');
-  const [socket, setSocket] = useState<Socket | null>(null);
+  const [_socket, setSocket] = useState<Socket | null>(null);
 
   // Initialize Socket.IO connection
   useEffect(() => {
-    const newSocket = io('https://threew-task-point-assigner.onrender.com/api');
+    const newSocket = io('https://threew-task-point-assigner.onrender.com');
     setSocket(newSocket);
 
     newSocket.on('usersUpdated', (updatedUsers: User[]) => {  
@@ -34,7 +34,7 @@ function App() {
     return () => {
       newSocket.close();
     };
-  }, [socket]);
+  }, []);
 
   // Load users on component mount
   useEffect(() => {
