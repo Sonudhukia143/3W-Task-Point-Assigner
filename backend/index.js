@@ -10,7 +10,7 @@ import claimsRouter from './routes/claims.js';
 dotenv.config(); // loads environment variables from .env file
 
 const corsOptions = {
-  origin: ['http://localhost:5173'],   // allows requests from http://localhost:5173 and live url
+  origin: ['http://localhost:5173','https://task-point-assigner.netlify.app'],   // allows requests from http://localhost:5173 and live url
   credentials: true,
   methods: ['GET', 'POST'],
   optionsSuccessStatus: 200,

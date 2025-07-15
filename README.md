@@ -1,3 +1,5 @@
+Hi , I am Sonu and I have completed the project with all required functionalities within the required time frame.
+
 # Leaderboard Task App
 
 A full-stack application that allows users to claim random points and view real-time leaderboard rankings.
