@@ -17,6 +17,13 @@ function App() {
   const [activeTab, setActiveTab] = useState('leaderboard');
   const [_socket, setSocket] = useState<Socket | null>(null);
 
+  console.log(users);
+  console.log(selectedUserId);
+  console.log(isClaiming);
+  console.log(isAdding);
+  console.log(lastClaimedPoints);
+  console.log(activeTab);
+
   // Initialize Socket.IO connection
   useEffect(() => {
     const newSocket = io('https://threew-task-point-assigner.onrender.com');
