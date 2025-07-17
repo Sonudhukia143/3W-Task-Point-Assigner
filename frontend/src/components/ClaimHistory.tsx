@@ -3,7 +3,7 @@ import { io, Socket } from 'socket.io-client';
 import { getClaimHistory } from '../api/api';
 import type { ClaimHistory as ClaimHistoryType } from '../api/api';
 
-const SOCKET_URL = 'https://threew-task-point-assigner.onrender.com';
+const SOCKET_URL = 'https://3w-task-point-assigner-backend-production.up.railway.app';
 
 const ClaimHistory: React.FC = () => {
   const [history, setHistory] = useState<ClaimHistoryType[]>([]);

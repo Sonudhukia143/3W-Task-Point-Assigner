@@ -26,7 +26,7 @@ function App() {
 
   // Initialize Socket.IO connection
   useEffect(() => {
-    const newSocket = io('https://threew-task-point-assigner.onrender.com');
+    const newSocket = io('https://3w-task-point-assigner-backend-production.up.railway.app');
     setSocket(newSocket);
 
     newSocket.on('usersUpdated', (updatedUsers: User[]) => {  

@@ -1,5 +1,5 @@
 //const API_LOCAL_URL = 'http://localhost:3000/api';
-const API_DEPLOYED_URL = 'https://threew-task-point-assigner.onrender.com/api';
+const API_DEPLOYED_URL = 'https://3w-task-point-assigner-backend-production.up.railway.app/api';
 
 export interface User {
   _id: string;
